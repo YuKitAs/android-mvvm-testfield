@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,10 +39,7 @@ public class PostFragment extends Fragment {
         final PostViewModel viewModel =
                 ViewModelProviders.of(this, factory).get(PostViewModel.class);
         binding.setPostViewModel(viewModel);
-        binding.btnDelete.setOnClickListener((vm) -> {
-            binding.getPostViewModel().deleteData();
-            startActivity(new Intent(getActivity(), MainActivity.class));
-        });
+        binding.btnDelete.setOnClickListener((vm) -> showDeleteConfirmationDialog());
 
         viewModel.fetchData();
     }
@@ -53,5 +51,17 @@ public class PostFragment extends Fragment {
         fragment.setArguments(args);
 
         return fragment;
+    }
+
+    private void showDeleteConfirmationDialog() {
+        new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
+                .setTitle(R.string.alert_dialog_title_confirm)
+                .setMessage(R.string.alert_dialog_message_delete)
+                .setPositiveButton(R.string.alert_dialog_delete, (dialog, which) -> {
+                    binding.getPostViewModel().deleteData();
+                    startActivity(new Intent(getActivity(), MainActivity.class));
+                })
+                .setNegativeButton(R.string.alert_dialog_cancel, (dialog, which) -> dialog.cancel())
+                .show();
     }
 }
