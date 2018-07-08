@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">android-mvvm-testfield</string>
+    <string name="hint_title">Title</string>
+    <string name="hint_author">Author</string>
+    <string name="hint_content">Content</string>
+    <string name="btn_publish">Publish</string>
+</resources>
