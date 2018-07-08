@@ -1,6 +1,7 @@
 package yukitas.mvvm.views;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -29,8 +30,12 @@ public class CreatePostFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        CreatePostViewModel viewModel =
+        final CreatePostViewModel viewModel =
                 ViewModelProviders.of(this).get(CreatePostViewModel.class);
         binding.setCreatePostViewModel(viewModel);
+        binding.btnPublish.setOnClickListener((vm) -> {
+            binding.getCreatePostViewModel().sendData();
+            startActivity(new Intent(getActivity(), MainActivity.class));
+        });
     }
 }

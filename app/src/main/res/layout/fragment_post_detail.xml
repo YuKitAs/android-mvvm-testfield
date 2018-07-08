@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -13,52 +13,66 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="10dp">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/title"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:text="@{postViewModel.postObservable.title}"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/title"
+                    android:layout_below="@+id/title"
+                    android:layout_marginTop="10dp"
+                    android:text="@{postViewModel.postObservable.author}"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/created_at"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/title"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@{postViewModel.postObservable.createdAt}"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/title"
+                    android:layout_below="@+id/author"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@{postViewModel.postObservable.content}"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btn_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:lines="1"
-                android:text="@{postViewModel.postObservable.title}"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/title"
-                android:layout_below="@+id/title"
-                android:layout_marginTop="10dp"
-                android:text="@{postViewModel.postObservable.author}"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/created_at"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/title"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="10dp"
-                android:text="@{postViewModel.postObservable.createdAt}"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/title"
-                android:layout_below="@+id/author"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="10dp"
-                android:text="@{postViewModel.postObservable.content}"
-                android:textSize="14sp" />
-        </RelativeLayout>
+                android:layout_gravity="end|bottom"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_delete_forever_black_24dp"
+                app:fabSize="normal" />
+        </FrameLayout>
     </android.support.constraint.ConstraintLayout>
 </layout>

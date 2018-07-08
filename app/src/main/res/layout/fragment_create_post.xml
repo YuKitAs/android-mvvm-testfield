@@ -12,78 +12,71 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp">
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="10dp">
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/input_layout_title"
+                <EditText
+                    android:id="@+id/title"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/hint_title"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:text="@={createPostViewModel.title}"
-                        android:textSize="14sp" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/input_layout_author"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/author"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/hint_author"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:text="@={createPostViewModel.author}"
-                        android:textSize="14sp" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/input_layout_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/content"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/hint_content"
-                        android:inputType="text|textMultiLine"
-                        android:maxLines="5"
-                        android:text="@={createPostViewModel.content}"
-                        android:textSize="14sp" />
-                </android.support.design.widget.TextInputLayout>
-
-                <Button
-                    android:id="@+id/btn_publish"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/colorPrimary"
-                    android:onClick="@{()-> createPostViewModel.sendData()}"
-                    android:text="@string/btn_publish"
-                    android:textColor="@android:color/white" />
-            </LinearLayout>
-        </FrameLayout>
+                    android:hint="@string/hint_title"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:text="@={createPostViewModel.title}"
+                    android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/author"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_author"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:text="@={createPostViewModel.author}"
+                    android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_content"
+                    android:inputType="text|textMultiLine"
+                    android:maxLines="5"
+                    android:text="@={createPostViewModel.content}"
+                    android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_publish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimary"
+                android:text="@string/btn_publish"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 </layout>

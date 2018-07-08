@@ -17,25 +17,23 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            PostListFragment postListFragment = new PostListFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, postListFragment).commit();
+                    .add(R.id.fragment_container, new PostListFragment()).commit();
         }
     }
 
-    public void show(Post post) {
+    public void showPost(Post post) {
         if (findViewById(R.id.fragment_container) != null) {
-            PostFragment postFragment = PostFragment.build(post.getId());
             getSupportFragmentManager()
                     .beginTransaction()
                     // String here is optional, which is a reference to this transaction:
                     .addToBackStack(null)
                     .replace(R.id.fragment_container,
-                            postFragment).commit();
+                            PostFragment.build(post.getId())).commit();
         }
     }
 
-    public void add() {
+    public void addPost() {
         if (findViewById(R.id.fragment_container) != null) {
             getSupportFragmentManager()
                     .beginTransaction()

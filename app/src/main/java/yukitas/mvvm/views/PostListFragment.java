@@ -25,7 +25,7 @@ public class PostListFragment extends Fragment {
     private FragmentPostListBinding binding;
     private final PostClickCallback postClickCallback = post -> {
         if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-            ((MainActivity) Objects.requireNonNull(getActivity())).show(post);
+            ((MainActivity) Objects.requireNonNull(getActivity())).showPost(post);
         }
     };
 
@@ -39,7 +39,7 @@ public class PostListFragment extends Fragment {
 
         binding.btnAdd.setOnClickListener((vm) -> {
             if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-                ((MainActivity) Objects.requireNonNull(getActivity())).add();
+                ((MainActivity) Objects.requireNonNull(getActivity())).addPost();
             }
         });
 
