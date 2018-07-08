@@ -1,6 +1,9 @@
 package yukitas.mvvm.repositories;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
+
+import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -9,8 +12,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import yukitas.mvvm.models.Post;
-import yukitas.mvvm.services.RetrofitClientInstance;
 import yukitas.mvvm.services.PostService;
+import yukitas.mvvm.services.RetrofitClientInstance;
 
 public class PostRepository {
     private PostService postService;
@@ -52,6 +55,20 @@ public class PostRepository {
             public void onResponse(Call<Post> call, Response<Post> response) {
                 Post post = response.body();
                 postSetter.accept(post);
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void sendPost(Post post) {
+        postService.savePost(post).enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                Log.i("sendPost", new Gson().toJson(response.body()));
             }
 
             @Override

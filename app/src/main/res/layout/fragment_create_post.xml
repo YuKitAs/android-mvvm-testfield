@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="postViewModel"
-            type="yukitas.mvvm.viewmodels.PostViewModel" />
+            name="createPostViewModel"
+            type="yukitas.mvvm.viewmodels.CreatePostViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -37,7 +37,7 @@
                         android:hint="@string/hint_title"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:text="@{postViewModel.postObservable.title}"
+                        android:text="@={createPostViewModel.title}"
                         android:textSize="14sp" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -53,7 +53,7 @@
                         android:hint="@string/hint_author"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:text="@{postViewModel.postObservable.author}"
+                        android:text="@={createPostViewModel.author}"
                         android:textSize="14sp" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -69,7 +69,7 @@
                         android:hint="@string/hint_content"
                         android:inputType="text|textMultiLine"
                         android:maxLines="5"
-                        android:text="@{postViewModel.postObservable.content}"
+                        android:text="@={createPostViewModel.content}"
                         android:textSize="14sp" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -80,6 +80,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:background="@color/colorPrimary"
+                    android:onClick="@{()-> createPostViewModel.sendData()}"
                     android:text="@string/btn_publish"
                     android:textColor="@android:color/white" />
             </LinearLayout>

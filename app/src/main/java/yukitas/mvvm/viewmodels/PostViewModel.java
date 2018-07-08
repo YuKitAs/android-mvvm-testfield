@@ -2,11 +2,11 @@ package yukitas.mvvm.viewmodels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import yukitas.mvvm.models.Post;
 import yukitas.mvvm.repositories.PostRepository;
