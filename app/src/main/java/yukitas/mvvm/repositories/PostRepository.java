@@ -77,4 +77,18 @@ public class PostRepository {
             }
         });
     }
+
+    public void deletePost(String postId) {
+        postService.deletePost(postId).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.i("deletePost", String.format("Post (id=%s) deleted.", postId));
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
 }

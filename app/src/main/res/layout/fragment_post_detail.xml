@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:layout_margin="16dp"
-                android:src="@drawable/ic_delete_forever_black_24dp"
+                android:src="@drawable/ic_delete_icon"
                 app:fabSize="normal" />
         </FrameLayout>
     </android.support.constraint.ConstraintLayout>
