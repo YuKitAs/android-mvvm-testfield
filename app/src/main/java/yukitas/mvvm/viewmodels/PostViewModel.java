@@ -2,53 +2,36 @@ package yukitas.mvvm.viewmodels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
-import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 
 import yukitas.mvvm.models.Post;
 import yukitas.mvvm.repositories.PostRepository;
 
 public class PostViewModel extends AndroidViewModel {
-    private final ObservableField<Post> postObservable = new ObservableField<>();
-    private final String postId;
+    private final android.arch.lifecycle.MutableLiveData<Post> selectedPost = new android.arch.lifecycle.MutableLiveData<>();
+    private String postId;
 
-    PostViewModel(@NonNull Application application, String postId) {
+    PostViewModel(@NonNull Application application) {
         super(application);
+    }
 
+    public void setPostId(String postId) {
         this.postId = postId;
     }
 
-    public ObservableField<Post> getPostObservable() {
-        return postObservable;
-    }
-
-    private void setPost(Post post) {
-        this.postObservable.set(post);
-    }
-
-    public void fetchData() {
+    public void fetchPost() {
         PostRepository.getInstance().fetchPostFromServer(postId, this::setPost);
     }
 
-    public void deleteData() {
+    public void deletePost() {
         PostRepository.getInstance().deletePost(postId);
     }
 
-    public static class Factory extends ViewModelProvider.NewInstanceFactory {
-        @NonNull
-        private final Application application;
-        private final String postId;
+    public android.arch.lifecycle.MutableLiveData<Post> getSelectedPost() {
+        return selectedPost;
+    }
 
-        public Factory(@NonNull Application application, String postId) {
-            this.application = application;
-            this.postId = postId;
-        }
-
-        @Override
-        public <T extends ViewModel> T create(Class<T> modelClass) {
-            return (T) new PostViewModel(application, postId);
-        }
+    private void setPost(Post post) {
+        this.selectedPost.setValue(post);
     }
 }

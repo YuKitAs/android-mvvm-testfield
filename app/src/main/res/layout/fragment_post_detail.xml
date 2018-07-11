@@ -29,7 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lines="1"
-                    android:text="@{postViewModel.postObservable.title}"
+                    android:text="@{postViewModel.selectedPost.title}"
                     android:textSize="20sp" />
 
                 <TextView
@@ -39,7 +39,7 @@
                     android:layout_alignStart="@+id/title"
                     android:layout_below="@+id/title"
                     android:layout_marginTop="10dp"
-                    android:text="@{postViewModel.postObservable.author}"
+                    android:text="@{postViewModel.selectedPost.author}"
                     android:textSize="12sp" />
 
                 <TextView
@@ -50,7 +50,7 @@
                     android:layout_below="@+id/title"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="10dp"
-                    android:text="@{postViewModel.postObservable.createdAt}"
+                    android:text="@{postViewModel.selectedPost.createdAt}"
                     android:textSize="12sp" />
 
                 <TextView
@@ -61,7 +61,7 @@
                     android:layout_below="@+id/author"
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="10dp"
-                    android:text="@{postViewModel.postObservable.content}"
+                    android:text="@{postViewModel.selectedPost.content}"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -79,6 +79,7 @@
                     android:layout_alignParentEnd="true"
                     android:backgroundTint="#fe2e64"
                     android:src="@drawable/ic_delete"
+                    app:borderWidth="0dp"
                     app:fabSize="normal" />
 
                 <android.support.design.widget.FloatingActionButton
@@ -89,6 +90,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginBottom="16dp"
                     android:src="@drawable/ic_edit"
+                    app:borderWidth="0dp"
                     app:fabSize="normal" />
             </RelativeLayout>
         </FrameLayout>

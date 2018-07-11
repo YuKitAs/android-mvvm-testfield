@@ -57,7 +57,7 @@ public class PostListFragment extends Fragment {
     }
 
     private void observeViewModel(PostListViewModel viewModel) {
-        viewModel.getPostListObservable().observe(this, postList -> {
+        viewModel.getPostList().observe(this, postList -> {
             if (postList != null) {
                 postListAdapter.setPostList(postList);
             }

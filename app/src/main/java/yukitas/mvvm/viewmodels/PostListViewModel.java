@@ -11,15 +11,15 @@ import yukitas.mvvm.models.Post;
 import yukitas.mvvm.repositories.PostRepository;
 
 public class PostListViewModel extends AndroidViewModel {
-    private MutableLiveData<List<Post>> postListObservable;
+    private MutableLiveData<List<Post>> postList;
 
     public PostListViewModel(@NonNull Application application) {
         super(application);
 
-        postListObservable = PostRepository.getInstance().getPostList();
+        postList = PostRepository.getInstance().fetchPostListFromServer();
     }
 
-    public MutableLiveData<List<Post>> getPostListObservable() {
-        return postListObservable;
+    public MutableLiveData<List<Post>> getPostList() {
+        return postList;
     }
 }

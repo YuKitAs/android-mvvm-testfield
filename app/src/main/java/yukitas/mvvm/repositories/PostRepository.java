@@ -30,7 +30,7 @@ public class PostRepository {
         return postRepository;
     }
 
-    public MutableLiveData<List<Post>> getPostList() {
+    public MutableLiveData<List<Post>> fetchPostListFromServer() {
         final MutableLiveData<List<Post>> posts = new MutableLiveData<>();
 
         postService.getAll().enqueue(new Callback<List<Post>>() {
@@ -53,8 +53,7 @@ public class PostRepository {
         postService.getPost(postId).enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
-                Post post = response.body();
-                postSetter.accept(post);
+                postSetter.accept(response.body());
             }
 
             @Override

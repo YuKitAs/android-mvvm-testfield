@@ -34,14 +34,14 @@ public class PostFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        PostViewModel.Factory factory = new PostViewModel.Factory(
-                Objects.requireNonNull(getActivity()).getApplication(), Objects.requireNonNull(getArguments()).getString(POST_ID));
         final PostViewModel viewModel =
-                ViewModelProviders.of(this, factory).get(PostViewModel.class);
+                ViewModelProviders.of(this).get(PostViewModel.class);
         binding.setPostViewModel(viewModel);
+        binding.setLifecycleOwner(this);
         binding.btnDelete.setOnClickListener((vm) -> showDeleteConfirmationDialog());
 
-        viewModel.fetchData();
+        viewModel.setPostId(Objects.requireNonNull(getArguments()).getString(POST_ID));
+        viewModel.fetchPost();
     }
 
     public static PostFragment build(String postId) {
@@ -58,7 +58,7 @@ public class PostFragment extends Fragment {
                 .setTitle(R.string.alert_dialog_title_confirm)
                 .setMessage(R.string.alert_dialog_message_delete)
                 .setPositiveButton(R.string.alert_dialog_delete, (dialog, which) -> {
-                    binding.getPostViewModel().deleteData();
+                    binding.getPostViewModel().deletePost();
                     startActivity(new Intent(getActivity(), MainActivity.class));
                 })
                 .setNegativeButton(R.string.alert_dialog_cancel, (dialog, which) -> dialog.cancel())
