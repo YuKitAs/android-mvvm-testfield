@@ -33,6 +33,7 @@ public class CreatePostFragment extends Fragment {
         final CreatePostViewModel viewModel =
                 ViewModelProviders.of(this).get(CreatePostViewModel.class);
         binding.setCreatePostViewModel(viewModel);
+        binding.setLifecycleOwner(this);
         binding.btnPublish.setOnClickListener((vm) -> {
             binding.getCreatePostViewModel().sendData();
             startActivity(new Intent(getActivity(), MainActivity.class));
