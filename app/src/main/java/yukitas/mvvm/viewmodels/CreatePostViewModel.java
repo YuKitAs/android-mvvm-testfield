@@ -10,8 +10,8 @@ import yukitas.mvvm.repositories.PostRepository;
 
 public class CreatePostViewModel extends AndroidViewModel {
     private final MutableLiveData<String> title = new MutableLiveData<>();
-    private final MutableLiveData<String> author = new MutableLiveData<>();
     private final MutableLiveData<String> content = new MutableLiveData<>();
+    private final MutableLiveData<String> author = new MutableLiveData<>();
 
     public CreatePostViewModel(@NonNull Application application) {
         super(application);
@@ -21,15 +21,15 @@ public class CreatePostViewModel extends AndroidViewModel {
         return title;
     }
 
-    public MutableLiveData<String> getAuthor() {
-        return author;
-    }
-
     public MutableLiveData<String> getContent() {
         return content;
     }
 
-    public void sendData() {
-        PostRepository.getInstance().sendPost(new Post(null, title.getValue(), content.getValue(), this.author.getValue(), null));
+    public MutableLiveData<String> getAuthor() {
+        return author;
+    }
+
+    public void sendPost() {
+        PostRepository.getInstance().sendPost(new Post(null, title.getValue(), content.getValue(), author.getValue(), null));
     }
 }

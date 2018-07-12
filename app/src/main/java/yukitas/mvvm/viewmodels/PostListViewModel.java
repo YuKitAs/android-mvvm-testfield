@@ -15,11 +15,9 @@ public class PostListViewModel extends AndroidViewModel {
 
     public PostListViewModel(@NonNull Application application) {
         super(application);
-
-        postList = PostRepository.getInstance().fetchPostListFromServer();
     }
 
     public MutableLiveData<List<Post>> getPostList() {
-        return postList;
+        return PostRepository.getInstance().fetchPostListFromServer();
     }
 }

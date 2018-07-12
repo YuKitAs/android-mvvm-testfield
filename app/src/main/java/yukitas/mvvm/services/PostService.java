@@ -8,6 +8,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import yukitas.mvvm.models.Post;
 
@@ -21,6 +22,10 @@ public interface PostService {
     @Headers("Content-Type: application/json")
     @POST("posts")
     Call<Post> savePost(@Body Post post);
+
+    @Headers("Content-Type: application/json")
+    @PUT("posts/{id}")
+    Call<Post> updatePost(@Path("id") String postId, @Body Post post);
 
     @DELETE("posts/{id}")
     Call<Void> deletePost(@Path("id") String postId);

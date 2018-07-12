@@ -11,17 +11,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import yukitas.mvvm.R;
-import yukitas.mvvm.databinding.FragmentCreatePostBinding;
-import yukitas.mvvm.viewmodels.CreatePostViewModel;
+import java.util.Objects;
 
-public class CreatePostFragment extends Fragment {
-    private FragmentCreatePostBinding binding;
+import yukitas.mvvm.R;
+import yukitas.mvvm.databinding.FragmentEditPostBinding;
+import yukitas.mvvm.viewmodels.PostViewModel;
+
+public class EditPostFragment extends Fragment {
+    private FragmentEditPostBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_post, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_post, container, false);
 
         return binding.getRoot();
     }
@@ -31,13 +33,13 @@ public class CreatePostFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         if (isAdded()) {
-            final CreatePostViewModel viewModel =
-                    ViewModelProviders.of(this).get(CreatePostViewModel.class);
+            final PostViewModel viewModel =
+                    ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(PostViewModel.class);
 
-            binding.setCreatePostViewModel(viewModel);
+            binding.setPostViewModel(viewModel);
             binding.setLifecycleOwner(this);
-            binding.btnPublish.setOnClickListener((vm) -> {
-                viewModel.sendPost();
+            binding.btnUpdate.setOnClickListener((vm) -> {
+                viewModel.updatePost();
                 startActivity(new Intent(getActivity(), MainActivity.class));
             });
         }

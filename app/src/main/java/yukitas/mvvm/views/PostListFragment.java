@@ -25,7 +25,7 @@ public class PostListFragment extends Fragment {
     private FragmentPostListBinding binding;
     private final PostClickCallback postClickCallback = post -> {
         if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-            ((MainActivity) Objects.requireNonNull(getActivity())).showPost(post);
+            ((MainActivity) Objects.requireNonNull(getActivity())).attachPostFragment(post);
         }
     };
 
@@ -33,15 +33,6 @@ public class PostListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_list, container, false);
-        binding.postList.setLayoutManager(new LinearLayoutManager(Objects.requireNonNull(getActivity()).getApplicationContext()));
-        postListAdapter = new PostListAdapter(postClickCallback);
-        binding.postList.setAdapter(postListAdapter);
-
-        binding.btnAdd.setOnClickListener((vm) -> {
-            if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-                ((MainActivity) Objects.requireNonNull(getActivity())).addPost();
-            }
-        });
 
         return binding.getRoot();
     }
@@ -50,10 +41,22 @@ public class PostListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        final PostListViewModel viewModel =
-                ViewModelProviders.of(this).get(PostListViewModel.class);
+        if (isAdded()) {
+            final PostListViewModel viewModel =
+                    ViewModelProviders.of(this).get(PostListViewModel.class);
 
-        observeViewModel(viewModel);
+            binding.postList.setLayoutManager(new LinearLayoutManager(Objects.requireNonNull(getActivity()).getApplicationContext()));
+            postListAdapter = new PostListAdapter(postClickCallback);
+            binding.postList.setAdapter(postListAdapter);
+            binding.setLifecycleOwner(this);
+            binding.btnAdd.setOnClickListener((vm) -> {
+                if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+                    ((MainActivity) getActivity()).attachCreatePostFragment();
+                }
+            });
+
+            observeViewModel(viewModel);
+        }
     }
 
     private void observeViewModel(PostListViewModel viewModel) {

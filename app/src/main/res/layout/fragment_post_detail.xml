@@ -29,7 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lines="1"
-                    android:text="@{postViewModel.selectedPost.title}"
+                    android:text="@{postViewModel.title}"
                     android:textSize="20sp" />
 
                 <TextView
@@ -39,7 +39,7 @@
                     android:layout_alignStart="@+id/title"
                     android:layout_below="@+id/title"
                     android:layout_marginTop="10dp"
-                    android:text="@{postViewModel.selectedPost.author}"
+                    android:text="@{postViewModel.author}"
                     android:textSize="12sp" />
 
                 <TextView
@@ -50,7 +50,7 @@
                     android:layout_below="@+id/title"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="10dp"
-                    android:text="@{postViewModel.selectedPost.createdAt}"
+                    android:text="@{postViewModel.createdAt}"
                     android:textSize="12sp" />
 
                 <TextView
@@ -61,7 +61,7 @@
                     android:layout_below="@+id/author"
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="10dp"
-                    android:text="@{postViewModel.selectedPost.content}"
+                    android:text="@{postViewModel.content}"
                     android:textSize="14sp" />
             </RelativeLayout>
 

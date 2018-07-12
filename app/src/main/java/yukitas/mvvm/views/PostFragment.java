@@ -1,5 +1,6 @@
 package yukitas.mvvm.views;
 
+import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -34,14 +35,24 @@ public class PostFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        final PostViewModel viewModel =
-                ViewModelProviders.of(this).get(PostViewModel.class);
-        binding.setPostViewModel(viewModel);
-        binding.setLifecycleOwner(this);
-        binding.btnDelete.setOnClickListener((vm) -> showDeleteConfirmationDialog());
+        if (isAdded()) {
+            final PostViewModel viewModel =
+                    ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(PostViewModel.class);
 
-        viewModel.setPostId(Objects.requireNonNull(getArguments()).getString(POST_ID));
-        viewModel.fetchPost();
+            binding.setPostViewModel(viewModel);
+            binding.setLifecycleOwner(this);
+
+            viewModel.setPostId(Objects.requireNonNull(getArguments()).getString(POST_ID));
+
+            binding.btnDelete.setOnClickListener((vm) -> showDeleteConfirmationDialog());
+            binding.btnEdit.setOnClickListener((vm) -> {
+                if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+                    ((MainActivity) Objects.requireNonNull(getActivity())).attachEditPostFragment();
+                }
+            });
+
+            viewModel.fetchPost();
+        }
     }
 
     public static PostFragment build(String postId) {
