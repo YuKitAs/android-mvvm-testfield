@@ -31,22 +31,22 @@ public class PostRepository {
     }
 
     public MutableLiveData<List<Post>> fetchPostListFromServer() {
-        final MutableLiveData<List<Post>> posts = new MutableLiveData<>();
+        final MutableLiveData<List<Post>> postList = new MutableLiveData<>();
 
         postService.getAll().enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                posts.setValue(response.body());
+                postList.setValue(response.body());
             }
 
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
-                posts.setValue(null);
+                Log.e("fetchPostListFromServer", "Fetching post list failed.");
                 t.printStackTrace();
             }
         });
 
-        return posts;
+        return postList;
     }
 
     public void fetchPostFromServer(String postId, Consumer<Post> postSetter) {
@@ -58,6 +58,7 @@ public class PostRepository {
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
+                Log.e("fetchPostFromServer", "Fetching post failed.");
                 t.printStackTrace();
             }
         });
@@ -67,11 +68,27 @@ public class PostRepository {
         postService.savePost(post).enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
-                Log.i("sendPost", new Gson().toJson(response.body()));
+                Log.i("sendPost", String.format("Post %s created.", new Gson().toJson(response.body())));
             }
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
+                Log.e("sendPost", "Creating post failed.");
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void updatePost(String postId, Post post) {
+        postService.updatePost(postId, post).enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                Log.i("updatePost", String.format("Post %s updated.", new Gson().toJson(response.body())));
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                Log.e("updatePost", String.format("Updating post (id=%s) failed.", postId));
                 t.printStackTrace();
             }
         });
@@ -86,6 +103,7 @@ public class PostRepository {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("deletePost", String.format("Deleting post (id=%s) failed.", postId));
                 t.printStackTrace();
             }
         });
