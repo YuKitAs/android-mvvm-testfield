@@ -2,11 +2,14 @@ package yukitas.mvvm.views;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import yukitas.mvvm.R;
 import yukitas.mvvm.models.Post;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String POST_LIST_FRAGMENT_TAG = "post_list";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +21,17 @@ public class MainActivity extends AppCompatActivity {
             }
 
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new PostListFragment()).commit();
+                    .replace(R.id.fragment_container, new PostListFragment(), POST_LIST_FRAGMENT_TAG).commit();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().findFragmentByTag(POST_LIST_FRAGMENT_TAG).isVisible()) {
+            Log.i("onBackPressed", "Exiting app...");
+            finish();
+        } else {
+            super.onBackPressed();
         }
     }
 
@@ -26,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
         if (findViewById(R.id.fragment_container) != null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .addToBackStack(null)
                     .replace(R.id.fragment_container,
-                            PostFragment.build(post.getId())).commit();
+                            PostFragment.build(post.getId()))
+                    .addToBackStack(null).commit();
         }
     }
 
@@ -36,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
         if (findViewById(R.id.fragment_container) != null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .addToBackStack(null)
                     .replace(R.id.fragment_container,
-                            new CreatePostFragment()).commit();
+                            new CreatePostFragment())
+                    .addToBackStack(null).commit();
         }
     }
 
@@ -46,9 +59,9 @@ public class MainActivity extends AppCompatActivity {
         if (findViewById(R.id.fragment_container) != null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .addToBackStack(null)
                     .replace(R.id.fragment_container,
-                            new EditPostFragment()).commit();
+                            new EditPostFragment())
+                    .addToBackStack(null).commit();
         }
     }
 }
