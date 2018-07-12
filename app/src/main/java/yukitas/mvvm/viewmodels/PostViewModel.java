@@ -44,6 +44,10 @@ public class PostViewModel extends AndroidViewModel {
         PostRepository.getInstance().fetchPostFromServer(postId, this::setPost);
     }
 
+    public void sendPost() {
+        PostRepository.getInstance().sendPost(new Post(null, title.getValue(), content.getValue(), author.getValue(), null));
+    }
+
     public void updatePost() {
         PostRepository.getInstance().updatePost(postId,
                 new Post(postId, title.getValue(), content.getValue(), author.getValue(), selectedPost.getCreatedAt()));

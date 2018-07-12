@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import yukitas.mvvm.R;
 import yukitas.mvvm.databinding.FragmentCreatePostBinding;
-import yukitas.mvvm.viewmodels.CreatePostViewModel;
+import yukitas.mvvm.viewmodels.PostViewModel;
 
 public class CreatePostFragment extends Fragment {
     private FragmentCreatePostBinding binding;
@@ -31,10 +31,10 @@ public class CreatePostFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         if (isAdded()) {
-            final CreatePostViewModel viewModel =
-                    ViewModelProviders.of(this).get(CreatePostViewModel.class);
+            final PostViewModel viewModel =
+                    ViewModelProviders.of(this).get(PostViewModel.class);
 
-            binding.setCreatePostViewModel(viewModel);
+            binding.setPostViewModel(viewModel);
             binding.setLifecycleOwner(this);
             binding.btnPublish.setOnClickListener((vm) -> {
                 viewModel.sendPost();

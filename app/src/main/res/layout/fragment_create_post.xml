@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="createPostViewModel"
-            type="yukitas.mvvm.viewmodels.CreatePostViewModel" />
+            name="postViewModel"
+            type="yukitas.mvvm.viewmodels.PostViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,8 +17,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="10dp">
+            android:paddingTop="10dp"
+            android:paddingRight="20dp">
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_title"
@@ -32,7 +32,7 @@
                     android:hint="@string/hint_title"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:text="@={createPostViewModel.title}"
+                    android:text="@={postViewModel.title}"
                     android:textSize="14sp" />
             </android.support.design.widget.TextInputLayout>
 
@@ -48,7 +48,7 @@
                     android:hint="@string/hint_author"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:text="@={createPostViewModel.author}"
+                    android:text="@={postViewModel.author}"
                     android:textSize="14sp" />
             </android.support.design.widget.TextInputLayout>
 
@@ -64,7 +64,7 @@
                     android:hint="@string/hint_content"
                     android:inputType="text|textMultiLine"
                     android:maxLines="5"
-                    android:text="@={createPostViewModel.content}"
+                    android:text="@={postViewModel.content}"
                     android:textSize="14sp" />
             </android.support.design.widget.TextInputLayout>
 
