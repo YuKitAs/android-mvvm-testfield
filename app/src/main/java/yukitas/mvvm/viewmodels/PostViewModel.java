@@ -13,7 +13,6 @@ public class PostViewModel extends AndroidViewModel {
     private final MutableLiveData<String> content = new MutableLiveData<>();
     private final MutableLiveData<String> author = new MutableLiveData<>();
     private final MutableLiveData<String> createdAt = new MutableLiveData<>();
-    private Post selectedPost;
     private String postId;
 
     PostViewModel(@NonNull Application application) {
@@ -50,7 +49,7 @@ public class PostViewModel extends AndroidViewModel {
 
     public void updatePost() {
         PostRepository.getInstance().updatePost(postId,
-                new Post(postId, title.getValue(), content.getValue(), author.getValue(), selectedPost.getCreatedAt()));
+                new Post(postId, title.getValue(), content.getValue(), author.getValue(), createdAt.getValue()));
     }
 
     public void deletePost() {
@@ -59,7 +58,6 @@ public class PostViewModel extends AndroidViewModel {
 
     private void setPost(Post post) {
         if (post != null) {
-            this.selectedPost = post;
             this.title.setValue(post.getTitle());
             this.content.setValue(post.getContent());
             this.author.setValue(post.getAuthor());
