@@ -18,28 +18,37 @@ public class MainActivity extends AppCompatActivity {
             }
 
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, new PostListFragment()).commit();
+                    .replace(R.id.fragment_container, new PostListFragment()).commit();
         }
     }
 
-    public void showPost(Post post) {
+    public void attachPostFragment(Post post) {
         if (findViewById(R.id.fragment_container) != null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    // String here is optional, which is a reference to this transaction:
                     .addToBackStack(null)
                     .replace(R.id.fragment_container,
                             PostFragment.build(post.getId())).commit();
         }
     }
 
-    public void addPost() {
+    public void attachCreatePostFragment() {
         if (findViewById(R.id.fragment_container) != null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .addToBackStack(null)
                     .replace(R.id.fragment_container,
                             new CreatePostFragment()).commit();
+        }
+    }
+
+    public void attachEditPostFragment() {
+        if (findViewById(R.id.fragment_container) != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.fragment_container,
+                            new EditPostFragment()).commit();
         }
     }
 }
