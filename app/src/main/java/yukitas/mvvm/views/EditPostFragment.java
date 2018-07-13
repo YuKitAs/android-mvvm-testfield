@@ -21,6 +21,7 @@ import yukitas.mvvm.views.utils.RequiredFieldValidator;
 
 public class EditPostFragment extends Fragment {
     private FragmentEditPostBinding binding;
+    private static final String IS_CREATING = "is_creating";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -38,16 +39,38 @@ public class EditPostFragment extends Fragment {
             final PostViewModel viewModel =
                     ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(PostViewModel.class);
 
+            Boolean isCreating = Objects.requireNonNull(getArguments()).getBoolean(IS_CREATING);
+            if (isCreating) {
+                binding.btnSave.setText(R.string.btn_publish);
+                viewModel.clearSelectedPost();
+            } else {
+                binding.btnSave.setText(R.string.btn_update);
+            }
+
             binding.setPostViewModel(viewModel);
             binding.setLifecycleOwner(this);
-            binding.btnUpdate.setOnClickListener((btn) -> {
+            binding.btnSave.setOnClickListener((btn) -> {
                 if (RequiredFieldValidator.validate(viewModel.getTitle().getValue())) {
-                    viewModel.updatePost();
+                    if (isCreating) {
+                        viewModel.sendPost();
+                    } else {
+                        viewModel.updatePost();
+                    }
+
                     startActivity(new Intent(getActivity(), MainActivity.class));
                 } else {
                     Toast.makeText(getContext(), R.string.toast_text_require_title, Toast.LENGTH_LONG).show();
                 }
             });
         }
+    }
+
+    public static EditPostFragment build(Boolean isCreating) {
+        EditPostFragment fragment = new EditPostFragment();
+        Bundle args = new Bundle();
+        args.putBoolean(IS_CREATING, isCreating);
+        fragment.setArguments(args);
+
+        return fragment;
     }
 }

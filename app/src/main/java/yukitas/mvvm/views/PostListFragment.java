@@ -51,7 +51,7 @@ public class PostListFragment extends Fragment {
             binding.setLifecycleOwner(this);
             binding.btnAdd.setOnClickListener((btn) -> {
                 if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-                    ((MainActivity) getActivity()).attachCreatePostFragment();
+                    ((MainActivity) getActivity()).attachEditPostFragment(true);
                 }
             });
 

@@ -45,22 +45,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void attachCreatePostFragment() {
+    public void attachEditPostFragment(Boolean isCreating) {
         if (findViewById(R.id.fragment_container) != null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container,
-                            new CreatePostFragment())
-                    .addToBackStack(null).commit();
-        }
-    }
-
-    public void attachEditPostFragment() {
-        if (findViewById(R.id.fragment_container) != null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container,
-                            new EditPostFragment())
+                            EditPostFragment.build(isCreating))
                     .addToBackStack(null).commit();
         }
     }

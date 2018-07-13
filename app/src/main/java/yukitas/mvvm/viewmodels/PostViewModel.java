@@ -57,6 +57,14 @@ public class PostViewModel extends AndroidViewModel {
         PostRepository.getInstance().deletePost(postId);
     }
 
+    public void clearSelectedPost() {
+        postId = null;
+        title.setValue(null);
+        content.setValue(null);
+        author.setValue(null);
+        createdAt.setValue(null);
+    }
+
     private void setFetchedPost(Post post) {
         if (post != null) {
             this.title.setValue(post.getTitle());
