@@ -44,7 +44,7 @@ public class PostFragment extends Fragment {
 
             viewModel.setPostId(Objects.requireNonNull(getArguments()).getString(POST_ID));
 
-            binding.btnDelete.setOnClickListener((vm) -> showDeleteConfirmationDialog());
+            binding.btnDelete.setOnClickListener((btn) -> showDeleteConfirmationDialog());
             binding.btnEdit.setOnClickListener((vm) -> {
                 if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
                     ((MainActivity) Objects.requireNonNull(getActivity())).attachEditPostFragment();

@@ -49,7 +49,7 @@ public class PostListFragment extends Fragment {
             postListAdapter = new PostListAdapter(postClickCallback);
             binding.postList.setAdapter(postListAdapter);
             binding.setLifecycleOwner(this);
-            binding.btnAdd.setOnClickListener((vm) -> {
+            binding.btnAdd.setOnClickListener((btn) -> {
                 if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
                     ((MainActivity) getActivity()).attachCreatePostFragment();
                 }

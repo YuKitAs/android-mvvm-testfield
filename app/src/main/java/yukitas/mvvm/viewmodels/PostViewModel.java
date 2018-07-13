@@ -13,6 +13,7 @@ public class PostViewModel extends AndroidViewModel {
     private final MutableLiveData<String> content = new MutableLiveData<>();
     private final MutableLiveData<String> author = new MutableLiveData<>();
     private final MutableLiveData<String> createdAt = new MutableLiveData<>();
+    private static final String DEFAULT_AUTHOR = "Anonymous";
     private String postId;
 
     PostViewModel(@NonNull Application application) {
@@ -40,28 +41,37 @@ public class PostViewModel extends AndroidViewModel {
     }
 
     public void fetchPost() {
-        PostRepository.getInstance().fetchPostFromServer(postId, this::setPost);
+        PostRepository.getInstance().fetchPostFromServer(postId, this::setFetchedPost);
     }
 
     public void sendPost() {
-        PostRepository.getInstance().sendPost(new Post(null, title.getValue(), content.getValue(), author.getValue(), null));
+        PostRepository.getInstance().sendPost(buildPost());
     }
 
     public void updatePost() {
-        PostRepository.getInstance().updatePost(postId,
-                new Post(postId, title.getValue(), content.getValue(), author.getValue(), createdAt.getValue()));
+        buildPost();
+        PostRepository.getInstance().updatePost(postId, buildPost());
     }
 
     public void deletePost() {
         PostRepository.getInstance().deletePost(postId);
     }
 
-    private void setPost(Post post) {
+    private void setFetchedPost(Post post) {
         if (post != null) {
             this.title.setValue(post.getTitle());
             this.content.setValue(post.getContent());
             this.author.setValue(post.getAuthor());
             this.createdAt.setValue(post.getCreatedAt());
         }
+    }
+
+    private Post buildPost() {
+        String title = this.title.getValue();
+        String content = this.content.getValue();
+        String author = this.author.getValue();
+        String createdAt = this.createdAt.getValue();
+
+        return new Post(postId, title, content == null ? "" : content, (author == null || author.trim().length() == 0) ? DEFAULT_AUTHOR : author, createdAt);
     }
 }
