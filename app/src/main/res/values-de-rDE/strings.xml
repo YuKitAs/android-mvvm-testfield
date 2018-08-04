@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hint_title">Überschrift</string>
+    <string name="hint_author">Autor</string>
+    <string name="hint_content">Inhalt</string>
+    <string name="btn_publish">Posten</string>
+    <string name="btn_update">Bearbeiten</string>
+    <string name="alert_dialog_title_confirm">Bestätigung</string>
+    <string name="alert_dialog_message_delete">Sind Sie sicher dass Sie den Post wirklich löschen wollen?</string>
+    <string name="alert_dialog_delete">Löschen</string>
+    <string name="alert_dialog_cancel">Abbrechen</string>
+    <string name="toast_text_require_title">Die Überschrift darf nicht leer sein!</string>
+</resources>
